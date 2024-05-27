@@ -1,0 +1,4 @@
+Monospace
+Liberation Mono
+Hack Nerd Font Mono
+FontAwesome
