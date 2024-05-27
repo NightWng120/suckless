@@ -1,0 +1,7 @@
+# Things to know
+
+## For vol_perc Functionality
+
+- Create file "/etc/modules-load.d/modules.conf" if it doesn't already exist
+- Put "snd-pcm-oss" inside of it
+- Reboot computer and icon should be working
