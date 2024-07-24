@@ -12,7 +12,7 @@ static const int showbar             = 1;        /* 0 means no bar */
 static const int topbar              = 1;        /* 0 means bottom bar */
 static const char *fonts[]           = { "monospace:size=12" , "fontawesome:size=12"};
 static const char dmenufont[]        = "monospace:size=12";
-static const char normbgcolor[]      = "#000000";
+static const char normbgcolor[]      = "#181818";
 static const char normbordercolor[]  = "#444444";
 static const char normfgcolor[]      = "#FFFFFF";
 static const char selfgcolor[]       = "#FFFFFF";
@@ -65,6 +65,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normbordercolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *clipmenucmd[] = { "clipmenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *bravebrowser[] = {"brave-browser", NULL};
 //"amixer", "-q", "sset", "Master", "3%-", "&&", "kill", "-45", "$(pidof dwmblocks)"
@@ -81,13 +82,14 @@ static const char *brdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_c,      spawn,          {.v = clipmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	//{ MODKEY|ControlMask,           XK_Delete, spawn,          SHCMD("pkill -u nightwng120")},
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} }, 
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 	//{ MODKEY|ControlMask,           XK_Delete, quit,           {1} }, 
 	//{ MODKEY|ShiftMask,             XK_Delete, spawn,          SHCMD("murder 1")},
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("scrot -e 'mv $f ~/Pictures/Screenshots'")}, //Screenshot keyboard shortcut
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("scrot -e 'mv $f ~/pictures/screenshots'")}, //Screenshot keyboard shortcut
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -110,12 +112,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_b, spawn,         {.v = bravebrowser } },
+	{ 0, XK_Caps_Lock, spawn, SHCMD("capslock && kill -46 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioMute, spawn, SHCMD("mute") },
-	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -q sset Master 5%- && kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -q sset Master 5%+ && kill -44 $(pidof dwmblocks)")},
-	{ 0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause  && kill -45 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioNext, spawn, SHCMD("playerctl next && kill -45 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioPrev, spawn, SHCMD("playerctl previous && kill -45 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer -d 5 && kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer -i 5 && kill -44 $(pidof dwmblocks)")},
+	{ 0, XF86XK_Search, spawn, SHCMD("playerctl play-pause  && kill -45 $(pidof dwmblocks)") },
+	{ 0, XF86XK_LaunchA, spawn, SHCMD("playerctl previous && kill -45 $(pidof dwmblocks)") },
+	{ 0, XF86XK_Explorer, spawn, SHCMD("playerctl next && kill -45 $(pidof dwmblocks)") },
    { 0, XF86XK_MonBrightnessUp,  spawn,          {.v = brupcmd} },
    { 0, XF86XK_MonBrightnessDown, spawn,          {.v = brdowncmd} },
 	TAGKEYS(                        XK_1,                      0)
