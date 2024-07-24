@@ -65,7 +65,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normbordercolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *clipmenucmd[] = { "clipmenu", NULL };
+// static const char *clipmenucmd[] = { "clipmenu", NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normbordercolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *bravebrowser[] = {"brave-browser", NULL};
 //"amixer", "-q", "sset", "Master", "3%-", "&&", "kill", "-45", "$(pidof dwmblocks)"
